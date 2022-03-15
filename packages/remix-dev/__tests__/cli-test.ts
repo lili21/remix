@@ -58,7 +58,7 @@ describe("remix cli", () => {
           Values:
             - projectDir        The Remix project directory
             - template          The project template to use
-            - remixPlatform     node, cloudflare-pages, or cloudflare-workers
+            - remixPlatform     node, cloudflare-pages, cloudflare-workers, or deno
 
           Creating a new project:
 
@@ -198,11 +198,7 @@ describe("remix cli", () => {
         "create",
         projectDir,
         "--template",
-<<<<<<< HEAD
         "https://github.com/remix-run/remix/blob/113c46e76b1f532141c3026adba0fa81d6b053c6/packages/remix-dev/__tests__/fixtures/arc.tar.gz?raw=true",
-=======
-        "https://github.com/remix-run/remix/blob/fecc83d06f3a8528af84eded358811a13ab06b59/packages/remix-dev/__tests__/fixtures/arc.tar.gz?raw=true",
->>>>>>> dev
         "--no-install",
       ]);
       expect(stdout.trim()).toBe(
@@ -246,7 +242,6 @@ describe("remix cli", () => {
         `💿 That's it! \`cd\` into "${projectDir}" and check the README for development and deploy instructions!`
       );
       expect(fs.existsSync(path.join(projectDir, "package.json"))).toBeTruthy();
-<<<<<<< HEAD
       expect(fs.existsSync(path.join(projectDir, "app/root.jsx"))).toBeTruthy();
       expect(fs.existsSync(path.join(projectDir, "app/root.tsx"))).toBeFalsy();
       expect(
@@ -258,9 +253,6 @@ describe("remix cli", () => {
       );
       expect(pkgJSON.scripts.typecheck).toBeUndefined();
       expect(pkgJSON.devDependencies).not.toContain("typescript");
-=======
-      expect(fs.existsSync(path.join(projectDir, "app/root.tsx"))).toBeTruthy();
->>>>>>> dev
     });
 
     it("works for a file path to a directory on disk", async () => {
