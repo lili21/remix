@@ -2,4 +2,4 @@
   "deno.enable": true,
   "deno.lint": true,
   "deno.config": "./deno.json"
-} 
+}
