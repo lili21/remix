@@ -3,7 +3,11 @@ import fs from "fs/promises";
 import fse from "fs-extra";
 import cp from "child_process";
 import puppeteer from "puppeteer";
-import type { Page, HTTPResponse } from "puppeteer";
+import type {
+  Page,
+  Response as HTTPResponse,
+  Request as HTTPRequest,
+} from "puppeteer";
 import express from "express";
 import cheerio from "cheerio";
 import prettier from "prettier";
@@ -296,7 +300,7 @@ export async function createAppFixture(fixture: Fixture) {
        */
       disableJavaScript: async () => {
         await page.setRequestInterception(true);
-        let handler = (request: puppeteer.HTTPRequest) => {
+        let handler = (request: HTTPRequest) => {
           if (request.resourceType() === "script") request.abort();
           else request.continue();
         };
@@ -456,10 +460,10 @@ async function doAndWait(
   pollTime: number = 20,
   timeout: number = 2000
 ) {
-  let waiting: puppeteer.HTTPRequest[] = [];
+  let waiting: HTTPRequest[] = [];
 
   await page.setRequestInterception(true);
-  let onRequest = (interceptedRequest: puppeteer.HTTPRequest) => {
+  let onRequest = (interceptedRequest: HTTPRequest) => {
     interceptedRequest.continue();
     waiting.push(interceptedRequest);
   };
