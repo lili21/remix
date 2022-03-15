@@ -11,6 +11,10 @@ import * as semver from "semver";
 import sortPackageJSON from "sort-package-json";
 import glob from "fast-glob";
 import babel from "@babel/core";
+// @ts-expect-error these modules dont have types
+import babelPluginSyntaxJSX from "@babel/plugin-syntax-jsx";
+// @ts-expect-error these modules dont have types
+import babelPresetTypeScript from "@babel/preset-typescript";
 import prettier from "prettier";
 
 import packageJson from "./package.json";
@@ -423,8 +427,8 @@ async function detectTemplateType(
 function untype(filename: string, ts: string): string {
   const result = babel.transformSync(ts, {
     filename,
-    presets: [["@babel/preset-typescript", { jsx: "preserve" }]],
-    plugins: ["@babel/plugin-syntax-jsx"],
+    presets: [[babelPresetTypeScript, { jsx: "preserve" }]],
+    plugins: [babelPluginSyntaxJSX],
     compact: false,
     retainLines: true,
   });
