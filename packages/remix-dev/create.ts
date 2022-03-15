@@ -189,7 +189,9 @@ async function downloadAndExtractTemplateOrExample(
 
   let cwd = path.dirname(projectDir);
   let desiredDir = path.basename(projectDir);
-  let templateDir = path.join(desiredDir, type, name);
+  let exampleOrTemplateName =
+    type === "templates" && options.useTypeScript ? `${name}-ts` : name;
+  let templateDir = path.join(desiredDir, type, exampleOrTemplateName);
   await pipeline(
     response.body.pipe(gunzip()),
     tar.extract(cwd, {
@@ -357,9 +359,9 @@ async function isRemixTemplate(
     );
   }
   let results = await promise.json();
-
+  let possibleTemplateName = useTypeScript ? `${name}-ts` : name;
   let template = results.find((result: any) => {
-    return result.name === name;
+    return result.name === possibleTemplateName;
   });
   if (!template) return undefined;
   return template.name;
@@ -382,9 +384,7 @@ async function isRemixExample(name: string, token?: string) {
     );
   }
   let results = await promise.json();
-  let example = results.find((result: any) => {
-    return result.name === name;
-  });
+  let example = results.find((result: any) => result.name === name);
   if (!example) return undefined;
   return example.name;
 }
