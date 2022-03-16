@@ -1,11 +1,6 @@
+/** @type {import('@jest/types').Config.InitialOptions} */
 module.exports = {
-  roots: ["<rootDir>"],
   modulePathIgnorePatterns: [
-    "<rootDir>/.tmp",
-    "<rootDir>/examples",
-    "<rootDir>/templates",
-  ],
-  testPathIgnorePatterns: [
     "<rootDir>/.tmp",
     "<rootDir>/examples",
     "<rootDir>/templates",
