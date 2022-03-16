@@ -252,7 +252,7 @@ describe("remix cli", () => {
         fs.readFileSync(path.join(projectDir, "package.json"), "utf8")
       );
       expect(pkgJSON.scripts.typecheck).toBeUndefined();
-      expect(pkgJSON.devDependencies).not.toContain("typescript");
+      expect(Object.keys(pkgJSON.devDependencies)).not.toContain("typescript");
     });
 
     it("works for a file path to a directory on disk", async () => {

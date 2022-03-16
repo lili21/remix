@@ -142,7 +142,6 @@ export async function createApp({
   appPkg = sortPackageJSON(appPkg);
   await fse.writeJSON(path.join(projectDir, "package.json"), appPkg, {
     spaces: 2,
-    replacer: null,
   });
 
   if (!useTypeScript) {
@@ -496,6 +495,5 @@ async function deTypeScriptify(projectDir: string) {
   }
   fse.writeJSONSync(path.join(projectDir, "package.json"), newPackageJson, {
     spaces: 2,
-    replacer: null,
   });
 }
