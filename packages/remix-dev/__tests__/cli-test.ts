@@ -1,5 +1,6 @@
 import childProcess from "child_process";
 import fs from "fs";
+import fsp from "fs/promises";
 import path from "path";
 import util from "util";
 import { pathToFileURL } from "url";
@@ -15,12 +16,13 @@ const remix = path.resolve(
 const TEMP_DIR = path.join(process.cwd(), ".tmp", "create-remix");
 
 describe("remix cli", () => {
-  beforeAll(() => {
+  beforeAll(async () => {
     if (!fs.existsSync(remix)) {
       throw new Error(`Cannot run Remix CLI tests w/out building Remix`);
     }
 
-    fs.rmdirSync(TEMP_DIR);
+    await fsp.rm(TEMP_DIR, { force: true, recursive: true });
+    await fsp.mkdir(TEMP_DIR);
   });
 
   describe("the --help flag", () => {
