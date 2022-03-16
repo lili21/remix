@@ -228,7 +228,7 @@ describe("remix cli", () => {
       expect(fs.existsSync(path.join(projectDir, "app/root.tsx"))).toBeTruthy();
     });
 
-    it("works for a file URL to a tarball on disk and converts it to javascript", async () => {
+    it("works for a file URL to a tarball on disk", async () => {
       let projectDir = getProjectDir("file-url-tarball");
       let { stdout } = await execFile("node", [
         remix,
@@ -238,6 +238,23 @@ describe("remix cli", () => {
         pathToFileURL(
           path.join(__dirname, "fixtures", "arc.tar.gz")
         ).toString(),
+        "--no-install",
+      ]);
+      expect(stdout.trim()).toBe(
+        `💿 That's it! \`cd\` into "${projectDir}" and check the README for development and deploy instructions!`
+      );
+      expect(fs.existsSync(path.join(projectDir, "package.json"))).toBeTruthy();
+      expect(fs.existsSync(path.join(projectDir, "app/root.tsx"))).toBeTruthy();
+    });
+
+    it("converts a template to javascript", async () => {
+      let projectDir = getProjectDir("template-to-js");
+      let { stdout } = await execFile("node", [
+        remix,
+        "create",
+        projectDir,
+        "--template",
+        "blues-stack",
         "--no-install",
         "--no-typescript",
       ]);
