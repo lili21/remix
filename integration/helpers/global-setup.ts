@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
-export const TMP_DIR = path.join(process.cwd(), ".tmp");
+export const TMP_DIR = path.join(process.cwd(), ".tmp", "integration");
 
 // TODO: get rid of React Router `console.warn` when no routes match when testing
 console.warn = () => {};
