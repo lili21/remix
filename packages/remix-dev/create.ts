@@ -10,7 +10,7 @@ import tar from "tar-fs";
 import * as semver from "semver";
 import sortPackageJSON from "sort-package-json";
 import glob from "fast-glob";
-import babel from "@babel/core";
+import { transformSync } from "@babel/core";
 // @ts-expect-error these modules dont have types
 import babelPluginSyntaxJSX from "@babel/plugin-syntax-jsx";
 // @ts-expect-error these modules dont have types
@@ -422,7 +422,7 @@ async function detectTemplateType(
 }
 
 function untype(filename: string, ts: string): string {
-  const result = babel.transformSync(ts, {
+  const result = transformSync(ts, {
     filename,
     presets: [[babelPresetTypeScript, { jsx: "preserve" }]],
     plugins: [babelPluginSyntaxJSX],
