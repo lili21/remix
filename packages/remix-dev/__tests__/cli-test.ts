@@ -22,7 +22,7 @@ describe("remix cli", () => {
     }
 
     await fsp.rm(TEMP_DIR, { force: true, recursive: true });
-    await fsp.mkdir(TEMP_DIR);
+    await fsp.mkdir(TEMP_DIR, { recursive: true });
   });
 
   describe("the --help flag", () => {

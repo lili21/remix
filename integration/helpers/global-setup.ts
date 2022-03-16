@@ -11,5 +11,5 @@ export default async function setup() {
     force: true,
     recursive: true,
   });
-  await fs.mkdir(TMP_DIR);
+  await fs.mkdir(TMP_DIR, { recursive: true });
 }
