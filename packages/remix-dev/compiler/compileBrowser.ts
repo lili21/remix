@@ -82,6 +82,7 @@ const createEsbuildConfig = (
     entryPoints,
     outdir: config.assetsBuildDirectory,
     platform: "browser",
+    target: ['safari12'],
     format: "esm",
     external: getExternals(config),
     loader: loaders,
